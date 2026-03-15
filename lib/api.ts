@@ -10,28 +10,28 @@ const api = axios.create({
 });
 
 export const getSignLanguages = async (category?: string) => {
-  const url = category ? `/sign-languages/?category=${category}` : '/sign-languages/';
+  const url = category ? `/api/sign-languages/?category=${category}` : '/api/sign-languages/';
   const response = await api.get(url);
   return response.data;
 };
 
 export const getSignLanguageById = async (id: string) => {
-  const response = await api.get(`/sign-languages/${id}`);
+  const response = await api.get(`/api/sign-languages/${id}`);
   return response.data;
 };
 
 export const createSignLanguage = async (data: any) => {
-  const response = await api.post('/sign-languages/', data);
+  const response = await api.post('/api/sign-languages/', data);
   return response.data;
 };
 
 export const updateSignLanguage = async (id: string, data: any) => {
-  const response = await api.put(`/sign-languages/${id}`, data);
+  const response = await api.put(`/api/sign-languages/${id}`, data);
   return response.data;
 };
 
 export const deleteSignLanguage = async (id: string) => {
-  const response = await api.delete(`/sign-languages/${id}`);
+  const response = await api.delete(`/api/sign-languages/${id}`);
   return response.data;
 };
 
@@ -40,7 +40,7 @@ export const uploadPicture = async (label: string, file: File) => {
   formData.append('label', label);
   formData.append('file', file);
   
-  const response = await api.post('/sign-languages/uploadpicture', formData, {
+  const response = await api.post('/api/sign-languages/uploadpicture', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -53,7 +53,7 @@ export const uploadVideo = async (label: string, file: File) => {
   formData.append('label', label);
   formData.append('file', file);
   
-  const response = await api.post('/sign-languages/uploadvideo', formData, {
+  const response = await api.post('/api/sign-languages/uploadvideo', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
