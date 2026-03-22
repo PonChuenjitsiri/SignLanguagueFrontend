@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import "./globals.css";
 
 // เพิ่ม Viewport สำหรับ Theme Color (แนะนำสำหรับ Next.js 14+)
 export const viewport: Viewport = {

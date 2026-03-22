@@ -4,18 +4,19 @@ import { useState, useEffect } from 'react';
 import { getSignLanguages, createSignLanguage, deleteSignLanguage } from '../lib/api';
 import { SignLanguage } from '../lib/types';
 import Link from 'next/link';
+import InstallButton from '@/components/InstallButton';
 
 export default function Dashboard() {
   const [signs, setSigns] = useState<SignLanguage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  
+
   // New sign form state
   const [showAddForm, setShowAddForm] = useState(false);
   const [newLabel, setNewLabel] = useState('');
   const [newTitleThai, setNewTitleThai] = useState('');
   const [newCategory, setNewCategory] = useState('');
-  
+
   const fetchSigns = async () => {
     try {
       setLoading(true);
@@ -69,12 +70,16 @@ export default function Dashboard() {
       {/* Header Section - Responsive Flex */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Sign Language Admin</h1>
-        <button 
-          onClick={() => setShowAddForm(!showAddForm)}
-          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow transition"
-        >
-          {showAddForm ? 'Cancel' : '+ Add New Sign'}
-        </button>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <InstallButton /> {/* <-- 2. วางปุ่มติดตั้งแอป */}
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow transition"
+          >
+            {showAddForm ? 'Cancel' : '+ Add New Sign'}
+          </button>
+        </div>
+
       </div>
 
       {showAddForm && (
@@ -84,30 +89,30 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Label (English)</label>
-                <input 
-                  required 
-                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800" 
-                  value={newLabel} 
-                  onChange={(e) => setNewLabel(e.target.value)} 
+                <input
+                  required
+                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800"
+                  value={newLabel}
+                  onChange={(e) => setNewLabel(e.target.value)}
                   placeholder="e.g. hello"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Title (Thai)</label>
-                <input 
-                  required 
-                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800" 
-                  value={newTitleThai} 
-                  onChange={(e) => setNewTitleThai(e.target.value)} 
+                <input
+                  required
+                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800"
+                  value={newTitleThai}
+                  onChange={(e) => setNewTitleThai(e.target.value)}
                   placeholder="e.g. สวัสดี"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                <input 
-                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800" 
-                  value={newCategory} 
-                  onChange={(e) => setNewCategory(e.target.value)} 
+                <input
+                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800"
+                  value={newCategory}
+                  onChange={(e) => setNewCategory(e.target.value)}
                   placeholder="e.g. Greeting"
                 />
               </div>
@@ -168,14 +173,14 @@ export default function Dashboard() {
                       </td>
                       <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
                         <div className="flex justify-end items-center gap-3 sm:gap-4">
-                          <Link 
-                            href={`/edit/${sign._id}`} 
+                          <Link
+                            href={`/edit/${sign._id}`}
                             className="text-blue-600 hover:text-blue-900 font-semibold"
                           >
                             Edit
                           </Link>
-                          <button 
-                            onClick={() => handleDelete(sign._id)} 
+                          <button
+                            onClick={() => handleDelete(sign._id)}
                             className="text-red-600 hover:text-red-900 font-semibold"
                           >
                             Delete
