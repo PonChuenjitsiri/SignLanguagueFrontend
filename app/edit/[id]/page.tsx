@@ -164,7 +164,7 @@ export default function EditSignLanguage() {
                     className="w-full border border-gray-300 rounded p-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800" 
                     value={label} 
                     onChange={(e) => setLabel(e.target.value)} 
-                    disabled // Label is used as key for uploads, better not to change easily
+                    // disabled // Label is used as key for uploads, better not to change easily
                   />
                   <p className="text-xs text-gray-500 mt-1">Label is used as the unique identifier for files.</p>
                 </div>
