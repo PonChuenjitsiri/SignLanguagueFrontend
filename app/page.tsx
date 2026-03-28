@@ -15,6 +15,8 @@ export default function Dashboard() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newLabel, setNewLabel] = useState('');
   const [newTitleThai, setNewTitleThai] = useState('');
+  const [newTitleEng, setNewTitleEng] = useState(''); // <-- New
+  const [newSignMethod, setNewSignMethod] = useState(''); // <-- New
   const [newCategory, setNewCategory] = useState('');
 
   const fetchSigns = async () => {
@@ -41,11 +43,15 @@ export default function Dashboard() {
       await createSignLanguage({
         label: newLabel,
         titleThai: newTitleThai,
+        titleEng: newTitleEng,       // <-- New
+        signMethod: newSignMethod,   // <-- New
         category: newCategory
       });
       setShowAddForm(false);
       setNewLabel('');
       setNewTitleThai('');
+      setNewTitleEng('');            // <-- Reset
+      setNewSignMethod('');          // <-- Reset
       setNewCategory('');
       fetchSigns();
     } catch (err) {
@@ -114,6 +120,27 @@ export default function Dashboard() {
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
                   placeholder="e.g. Greeting"
+                />
+              </div>
+              {/* Inside your form grid */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Title (English)</label>
+                <input
+                  required
+                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800"
+                  value={newTitleEng}
+                  onChange={(e) => setNewTitleEng(e.target.value)}
+                  placeholder="e.g. We"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Sign Method</label>
+                <input
+                  required
+                  className="w-full border border-gray-300 rounded p-2 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-800"
+                  value={newSignMethod}
+                  onChange={(e) => setNewSignMethod(e.target.value)}
+                  placeholder="Describe the gesture"
                 />
               </div>
             </div>
